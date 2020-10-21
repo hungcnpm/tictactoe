@@ -24,6 +24,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  font-weight: bold;
 }
 .square:focus {
   outline: none;
@@ -32,7 +33,9 @@
 .square:hover{
   background: rgb(0, 68, 255);
 }
-
+.square--winning{
+  color: orange;
+}
 .board-row::after{
   clear: both;
   content: "";
@@ -48,8 +51,20 @@
   margin: 0 auto;
 }
 .restartBtn{
-  width: 80px;
+  width: 250px;
   height: 40px;
   margin-top: 10px;
   font-weight: bold;
+  margin-left: 10px;
+  display: block;
+  
+}
+.moveBtn{
+  height: 25px;
+  width: 130px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.moveBtn:hover{
+  background-color: aquamarine;
 }

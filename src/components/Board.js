@@ -1,43 +1,36 @@
-import React, { Component } from 'react';
-import Square from './Square';
+import React, { Component } from "react";
+import Square from "./Square";
 
-class Board extends React.Component {
-    
-   
-    
-    
-    renderSquare(i) {
-      return (
-      <Square 
-        value = {this.props.squares[i]} 
-        onClick = {() => this.props.onClick(i)}
-      />
-      );
-    }
-    
-    render() {
-        
-      return (
-        <div>
-          <div className="board-row">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
-          </div>
-          <button className = 'restartBtn' onClick = {() => this.props.restartGame()}>Restart</button>
-        </div>
-      );
-    }
+const Board = (props) => {
+  function renderSquare(i) {
+    return <Square 
+    isWinning={props.winningSquares.includes(i)}
+    key={"square " + i} 
+    value={props.squares[i]} 
+    onClick={() => props.onClick(i)} />;
   }
+  function renderSquares(n, size) {
+    let squares = [];
+    for (let i = n; i < n+size; i++) {
+      squares.push(renderSquare(i));
+    }
+    return squares;
+  }
+  function renderRows(i, size) {
+    return <div className="board-row">{renderSquares(i, size)}</div>;
+  }
+  function renderBoards(size){
+    let rows=[];
+    for(let i=0;i<size;i++){
+      rows.push(renderRows(size*i, size));
+    }
+    return (rows);
+  }
+  return (
+    <div>
+      {renderBoards(3)}
+    </div>
+  );
+};
 
 export default Board;
